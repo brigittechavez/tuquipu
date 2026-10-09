@@ -1,0 +1,156 @@
+.button {
+  --btn-bg: var(--color-action);
+  --btn-fg: var(--color-white);
+  --btn-border: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 1.5px solid var(--btn-border);
+  border-radius: var(--radius-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  transition:
+    transform var(--dur-micro) var(--ease-out),
+    background-color var(--dur-micro) var(--ease-out),
+    box-shadow var(--dur-micro) var(--ease-out),
+    border-color var(--dur-micro) var(--ease-out);
+}
+
+.button:focus-visible {
+  border-radius: var(--radius-pill);
+}
+
+.icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  transition: transform var(--dur-component) var(--ease-elastic);
+}
+
+.primary {
+  box-shadow: var(--shadow-action);
+}
+
+.primary:hover {
+  --btn-bg: var(--color-action-strong);
+}
+
+.button:hover .iconArrow {
+  transform: translateX(4px);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.secondary {
+  --btn-bg: var(--color-card);
+  --btn-fg: var(--color-ink);
+  --btn-border: var(--color-line-strong);
+  box-shadow: var(--shadow-card);
+}
+
+.secondary:hover {
+  --btn-border: var(--color-action);
+  --btn-fg: var(--color-accent-text);
+}
+
+.dark {
+  --btn-bg: var(--color-carbon);
+  --btn-fg: var(--color-white);
+}
+
+.dark:hover {
+  --btn-bg: #2a2c38;
+}
+
+.ghost {
+  --btn-bg: transparent;
+  --btn-fg: currentColor;
+  --btn-border: currentColor;
+}
+
+.ghost:hover {
+  --btn-bg: rgba(119, 0, 230, 0.08);
+}
+
+[data-tone="dark"] .ghost:hover,
+[data-tone="brand"] .ghost:hover {
+  --btn-bg: rgba(255, 255, 255, 0.1);
+}
+
+.onDark {
+  --btn-bg: var(--color-white);
+  --btn-fg: var(--color-carbon);
+}
+
+.onDark:hover {
+  --btn-bg: var(--color-lavender);
+}
+
+.small {
+  min-height: 44px;
+  padding: 10px 18px;
+  font-size: 0.9375rem;
+}
+
+.block {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .icon {
+    transition: none;
+  }
+
+  .button:active {
+    transform: none;
+  }
+
+  .button:hover .iconArrow {
+    transform: none;
+  }
+}
+
+@media (max-width: 399.98px) {
+  .button {
+    padding-inline: 16px;
+    gap: 8px;
+    font-size: 0.9375rem;
+  }
+}
+
+/* Selected text inside violet/dark buttons stays legible. */
+.primary::selection,
+.primary *::selection,
+.dark::selection,
+.dark *::selection {
+  background: var(--color-lavender);
+  color: var(--color-ink);
+}
+
+/* Dark theme: the "dark" button would vanish on a dark page, so it turns light. */
+@media (prefers-color-scheme: dark) {
+  .dark {
+    --btn-bg: var(--color-white);
+    --btn-fg: var(--color-carbon);
+  }
+
+  .dark:hover {
+    --btn-bg: var(--color-lavender);
+    --btn-fg: var(--color-ink);
+  }
+}

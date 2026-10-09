@@ -1,0 +1,197 @@
+.grid {
+  display: grid;
+  gap: var(--space-10);
+}
+
+.situations {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.situation {
+  position: relative;
+  padding: clamp(20px, 1rem + 1vw, 28px);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+}
+
+.index {
+  display: inline-flex;
+  margin-bottom: var(--space-3);
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-lavender);
+  color: var(--color-accent-text);
+  font-size: var(--text-micro);
+  font-weight: 500;
+}
+
+.situationTitle {
+  font-size: var(--text-h3);
+}
+
+.situationBody {
+  margin-top: var(--gap-subtitle-body);
+  color: var(--color-text-muted);
+}
+
+/* ─── Scene scrub (--p 0 → 1 from <ScrollProgress>) ───────────────────── */
+.scrub {
+  --chaos: clamp(0, calc(var(--p) / 0.6), 1);
+  --merge: clamp(0, calc((var(--p) - 0.62) / 0.33), 1);
+  margin-top: clamp(32px, 2rem + 2vw, 64px);
+}
+
+/* Enhanced (motion allowed): a tall track with a sticky scene — native scroll, no hijacking. */
+.scrub[data-scrub] {
+  height: 200vh;
+}
+
+.scrub[data-scrub] .sticky {
+  position: sticky;
+  top: calc(var(--header-height) + 8px);
+  display: grid;
+  align-content: center;
+  min-height: calc(100vh - var(--header-height) - 16px);
+}
+
+.split {
+  display: grid;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.caption {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* The two states share one line; the label crossfades as the areas dock. */
+.labels {
+  display: grid;
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+  font-weight: 500;
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+}
+
+.labelSeparate,
+.labelConnected {
+  grid-area: 1 / 1;
+}
+
+.labelSeparate {
+  color: var(--color-text-muted);
+  opacity: calc(1 - var(--merge));
+  transform: translateY(calc(var(--merge) * -10px));
+}
+
+.labelConnected {
+  color: var(--color-accent-text);
+  opacity: var(--merge);
+  transform: translateY(calc((1 - var(--merge)) * 10px));
+}
+
+.sceneWrap {
+  width: min(100%, 720px);
+  justify-self: center;
+}
+
+/* Phones: keep the scene within the visible height under the header. */
+@media (max-width: 767.98px) {
+  .sceneWrap {
+    width: min(100%, calc((100vh - var(--header-height) - 180px) * 1.08));
+  }
+}
+
+.note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--color-text);
+  font-weight: 500;
+  opacity: var(--merge);
+  transform: translateY(calc((1 - var(--merge)) * 12px));
+}
+
+.check {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scrub[data-assembled] .check {
+    animation: confirm 520ms var(--ease-elastic) both;
+  }
+}
+
+@keyframes confirm {
+  from {
+    transform: scale(0.4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .split {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: clamp(32px, 4vw, 72px);
+  }
+
+  .sceneWrap {
+    width: min(100%, calc((100vh - var(--header-height) - 40px) * 1.08));
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: clamp(40px, 5vw, 96px);
+    align-items: start;
+  }
+
+  /* Sticky stays inside the grid only; the assembly lives outside it (no overlap). */
+  .heading {
+    position: sticky;
+    top: calc(var(--header-height) + 48px);
+  }
+
+  .situations {
+    gap: var(--space-6);
+  }
+
+  .situation:nth-child(1) {
+    margin-right: 18%;
+  }
+
+  .situation:nth-child(2) {
+    margin-left: 14%;
+  }
+
+  .situation:nth-child(3) {
+    margin-right: 8%;
+  }
+
+
+
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :global(.js) .situation:not([data-inview]):nth-child(1) {
+    transform: translate(-18px, 28px) rotate(-3deg);
+  }
+
+  :global(.js) .situation:not([data-inview]):nth-child(2) {
+    transform: translate(22px, 28px) rotate(2.5deg);
+  }
+
+  :global(.js) .situation:not([data-inview]):nth-child(3) {
+    transform: translate(-10px, 28px) rotate(-1.5deg);
+  }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Cargando Tu Quipu</title>
+  <desc id="desc">Un comprobante se completa y confirma mientras carga el contenido.</desc>
+  <style>
+    .sheet{transform-box:fill-box;transform-origin:center;animation:sheet-in 1.6s cubic-bezier(.2,.75,.25,1) infinite}
+    .line{stroke-dasharray:52;animation:write 1.6s ease-in-out infinite}
+    .line.b{animation-delay:.12s}.line.c{animation-delay:.24s}
+    .check{stroke-dasharray:38;animation:confirm 1.6s ease-in-out infinite}
+    @keyframes sheet-in{0%,12%{opacity:.35;transform:translateY(5px) scale(.97)}35%,85%{opacity:1;transform:none}100%{opacity:.35;transform:translateY(-3px) scale(.98)}}
+    @keyframes write{0%,18%{stroke-dashoffset:52;opacity:.2}52%,88%{stroke-dashoffset:0;opacity:1}100%{opacity:.25}}
+    @keyframes confirm{0%,55%{stroke-dashoffset:38;opacity:0}78%,92%{stroke-dashoffset:0;opacity:1}100%{opacity:0}}
+    @media (prefers-reduced-motion:reduce){.sheet,.line,.check{animation:none}.line,.check{stroke-dashoffset:0;opacity:1}}
+  </style>
+  <g class="sheet" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="35" y="20" width="90" height="120" rx="28" fill="#F9FAFB" stroke="#12131A" stroke-width="6"/>
+    <path d="M55 51H105" class="line a" stroke="#7700E6" stroke-width="10"/>
+    <path d="M55 78H101" class="line b" stroke="#EBE7FF" stroke-width="10"/>
+    <path d="M55 104H87" class="line c" stroke="#EBE7FF" stroke-width="10"/>
+    <circle cx="108" cy="112" r="24" fill="#21C7B7" stroke="#F9FAFB" stroke-width="6"/>
+    <path d="M97 112L105 120 120 103" class="check" stroke="#F9FAFB" stroke-width="7"/>
+  </g>
+</svg>

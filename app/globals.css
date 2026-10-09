@@ -1,0 +1,506 @@
+/* ─── Design tokens · Claridad editorial en movimiento ───────────────────── */
+:root {
+  /* Color (approved palette) */
+  --color-action: #7700e6;
+  --color-action-strong: #6200bf;
+  --color-violet: #6045f4;
+  --color-mint: #21c7b7;
+  --color-carbon: #12131a;
+  --color-surface: #f9fafb;
+  --color-white: #ffffff;
+  --color-lavender: #ebe7ff;
+  --color-lavender-soft: #f4f2ff;
+  /* Derived neutrals (no beige/cream) */
+  --color-text: var(--color-carbon);
+  --color-text-muted: #4a4c5a;
+  --color-text-on-dark: #f9fafb;
+  --color-text-on-dark-muted: #c3c5d3;
+  --color-line: rgba(18, 19, 26, 0.1);
+  --color-line-strong: rgba(18, 19, 26, 0.18);
+  --color-carbon-raised: #1d1f29;
+  /* Accessibility-only states (not brand accents) */
+  --color-error: #b42318;
+  --color-error-surface: #fef3f2;
+  /* Semantic roles (flip in the dark theme; brand constants above never change):
+     card = raised surfaces, ink = text on surfaces, accent-text = violet used as text. */
+  --color-card: var(--color-white);
+  --color-ink: var(--color-carbon);
+  --color-accent-text: var(--color-action);
+  --color-mint-text: #0b6b62;
+
+  /* Typography — titles: Mona Sans expanded 500; body: Manrope 400/500. */
+  --font-body: var(--font-manrope), "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-mona), "Mona Sans", var(--font-manrope), system-ui, sans-serif;
+  --display-stretch: 118%;
+  --weight-display: 500;
+  --text-display: clamp(2.125rem, 1.2rem + 4.6vw, 5.25rem);
+  --text-h2: clamp(1.875rem, 1.3rem + 2.4vw, 3.375rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-body: 1.0625rem;
+  --text-small: 0.9375rem;
+  --text-micro: 0.8125rem;
+  --leading-tight: 1.04;
+  --leading-heading: 1.12;
+  --leading-body: 1.6;
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.025em;
+
+  /* Vertical rhythm */
+  --gap-hero-title-copy: clamp(28px, 2vw, 32px);
+  --gap-section-title-copy: clamp(20px, 1.4vw, 24px);
+  --gap-subtitle-body: 14px;
+  --gap-body-action: 28px;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --section-pad: clamp(72px, 5rem + 4vw, 152px);
+  --section-pad-compact: clamp(56px, 3rem + 3vw, 104px);
+  --gutter: clamp(16px, 4vw, 40px);
+  --container-wide: 1280px;
+  --container-content: 1120px;
+  --container-narrow: 760px;
+  --header-height: 68px;
+
+  /* Shape */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+  --radius-pill: 999px;
+
+  /* Elevation — short, soft, close to the object */
+  --shadow-card: 0 1px 2px rgba(18, 19, 26, 0.04), 0 6px 18px rgba(18, 19, 26, 0.06);
+  --shadow-raised: 0 2px 4px rgba(18, 19, 26, 0.05), 0 10px 26px rgba(18, 19, 26, 0.09);
+  --shadow-action: 0 6px 16px rgba(119, 0, 230, 0.2);
+
+  /* Focus */
+  --focus-ring: 3px solid var(--color-violet);
+  --focus-offset: 3px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.75, 0.25, 1);
+  --ease-elastic: cubic-bezier(0.34, 1.32, 0.64, 1);
+  --dur-micro: 200ms;
+  --dur-component: 380ms;
+  --dur-editorial: 720ms;
+  --dur-choreo: 1200ms;
+  --stagger: 100ms;
+
+  --z-header: 50;
+  --z-dialog: 100;
+
+  /* Light and dark themes follow the device; declaring both keeps browsers from
+     auto-darkening the page on their own (Chrome Auto Dark / Samsung Internet). */
+  color-scheme: light dark;
+  accent-color: var(--color-action);
+  caret-color: var(--color-action);
+}
+
+/* ─── Dark theme (follows the device). Brand colours stay; surfaces, text and tints flip. ─── */
+@media (prefers-color-scheme: dark) {
+  /* Illustrations keep their light objects; their carbon outlines gain a soft lift
+     so silhouettes read on the dark page. */
+  svg[data-iso-svg],
+  svg[data-journey-svg],
+  [data-scape] svg {
+    filter: drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.55));
+  }
+
+
+  :root {
+    --color-surface: #0e0f15;
+    --color-card: #171923;
+    --color-ink: #eeedf5;
+    --color-text: #eeedf5;
+    --color-text-muted: #a9abbc;
+    --color-accent-text: #b8a4ff;
+    --color-mint-text: #5fe3d5;
+    --color-lavender: #2a2450;
+    --color-lavender-soft: #15132a;
+    --color-line: rgba(255, 255, 255, 0.1);
+    --color-line-strong: rgba(255, 255, 255, 0.2);
+    --color-error: #ff8a80;
+    --color-error-surface: #2a1414;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 18px rgba(0, 0, 0, 0.35);
+    --shadow-raised: 0 2px 4px rgba(0, 0, 0, 0.35), 0 10px 26px rgba(0, 0, 0, 0.45);
+    --focus-ring: 3px solid #b8a4ff;
+  }
+}
+
+/* ─── Reset ────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 16px);
+  -webkit-tap-highlight-color: rgba(119, 0, 230, 0.12);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-feature-settings: "ss01" on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-weight: var(--weight-display);
+  font-stretch: var(--display-stretch);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: var(--cursor-pointer);
+}
+
+.cta-link-icon {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  color: var(--color-mint);
+}
+
+/* ─── Brand scrollbar: thin violet thumb, no grey system track ───────────── */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-violet) var(--color-lavender-soft);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-lavender-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid var(--color-lavender-soft);
+  border-radius: 999px;
+  background: var(--color-violet);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-action);
+}
+
+/* ─── Brand cursor (desktop, precise pointer only) ─────────────────────────
+   Native-speed SVG arrow: violet by default, mint on interactive targets,
+   white edge for dark sections. Text fields keep the I-beam. */
+:root {
+  --cursor-pointer: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :root {
+    --cursor-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M5 3.5 22.5 12.4 14.4 14.6 10.6 22.6Z' fill='%237700E6' stroke='%23fff' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 5 4, auto;
+    --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath d='M5 3.5 22.5 12.4 14.4 14.6 10.6 22.6Z' fill='%2321C7B7' stroke='%2312131A' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 5 4, pointer;
+  }
+
+  html {
+    cursor: var(--cursor-arrow);
+  }
+
+  a[href],
+  summary,
+  label:has(> input[type="radio"]),
+  label:has(> input[type="checkbox"]),
+  input[type="radio"],
+  input[type="checkbox"],
+  [role="tab"],
+  [role="button"] {
+    cursor: var(--cursor-pointer);
+  }
+
+  input:not([type="radio"], [type="checkbox"], [type="submit"], [type="button"]),
+  textarea {
+    cursor: text;
+  }
+}
+
+.cursor-ring {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2147483000;
+    display: block;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .cursor-ring::before {
+    content: "";
+    position: absolute;
+    left: -18px;
+    top: -18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(119, 0, 230, 0.45);
+    background: transparent;
+    transition:
+      scale 320ms var(--ease-elastic),
+      opacity 200ms var(--ease-out),
+      background-color 240ms var(--ease-out),
+      border-color 240ms var(--ease-out);
+  }
+
+  .cursor-ring[data-visible="false"]::before,
+  .cursor-ring[data-state="field"]::before {
+    opacity: 0;
+    scale: 0.4;
+  }
+
+  .cursor-ring[data-state="hover"]::before {
+    scale: 1.55;
+    border-color: rgba(119, 0, 230, 0.6);
+    background: transparent;
+  }
+
+  .cursor-ring[data-pressed="true"]::before {
+    scale: 0.8;
+  }
+
+  .cursor-ring[data-dark="true"]::before {
+    border-color: rgba(255, 255, 255, 0.55);
+  }
+
+  .cursor-ring[data-dark="true"][data-state="hover"]::before {
+    border-color: var(--color-mint);
+    background: rgba(33, 199, 183, 0.14);
+  }
+}
+
+/* ─── Brand interaction states ─────────────────────────────────────────── */
+/* Light, lavender and white surfaces: violet + white reads on all of them
+   (a lavender selection disappeared on lavender-soft areas such as the footer). */
+::selection {
+  background: var(--color-violet);
+  color: var(--color-white);
+}
+
+/* On dark or violet surfaces a light highlight stays visible (lavender + carbon). */
+[data-tone="dark"] ::selection,
+[data-tone="brand"] ::selection,
+[data-surface="action"]::selection,
+[data-surface="action"] ::selection {
+  background: var(--color-lavender);
+  color: var(--color-ink);
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Plain text links get a soft ring corner; zero specificity, so round or pill
+   components keep their own shape when focused. */
+:where(a:focus-visible) {
+  border-radius: 6px;
+}
+
+[data-tone="dark"] :focus-visible,
+[data-tone="brand"] :focus-visible {
+  outline-color: var(--color-white);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: var(--color-ink);
+  box-shadow: 0 0 0 1000px var(--color-lavender-soft) inset;
+  transition: background-color 9999s ease-out 0s;
+}
+
+input:autofill {
+  background: var(--color-lavender-soft);
+}
+
+/* ─── Utilities ────────────────────────────────────────────────────────── */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: calc(var(--z-dialog) + 1);
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--color-carbon);
+  color: var(--color-white);
+  font-weight: 500;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ─── Reveal system (progressive: only active once JS marks <html class="js">) ─ */
+@keyframes tq-reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    transition:
+      opacity var(--dur-editorial) var(--ease-out),
+      transform var(--dur-editorial) var(--ease-out),
+      clip-path var(--dur-editorial) var(--ease-out);
+    transition-delay: calc(var(--reveal-index, 0) * var(--stagger));
+  }
+
+  .js [data-reveal]:not([data-inview]):not([data-reveal="none"]):not([data-reveal="mask"]):not([data-reveal="kappi"]) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  /* Safety net: if the motion runtime never boots, content still appears. */
+  .js:not(.motion-ready) [data-reveal]:not([data-inview]),
+  .js:not(.motion-ready) [data-reveal="mask"]:not([data-inview]) > * {
+    animation: tq-reveal-fallback 0s linear 3s forwards;
+  }
+
+  /* The mask is applied to the children, never to the observed element itself:
+     a clip-path on the target makes IntersectionObserver report it as invisible. */
+  .js [data-reveal="mask"] > * {
+    transition: clip-path var(--dur-editorial) var(--ease-out);
+  }
+
+  .js [data-reveal="mask"]:not([data-inview]) > * {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  /* Negative inset keeps the short shadows visible once revealed. */
+  .js [data-reveal="mask"][data-inview] > * {
+    clip-path: inset(-48px);
+  }
+
+  .js [data-reveal="scale"]:not([data-inview]) {
+    transform: translateY(16px) scale(0.96);
+  }
+}
+
+main:focus {
+  outline: none;
+}
+
+/* Only approved weights exist (400/500): avoid synthesized bold. */
+b,
+strong {
+  font-weight: 500;
+}
+
+/* Anchors clear the sticky features map as well as the header. */
+html:has([data-features-map]) {
+  scroll-padding-top: calc(var(--header-height) + 80px);
+}

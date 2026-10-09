@@ -1,0 +1,34 @@
+.section {
+  position: relative;
+  isolation: isolate;
+}
+
+.regular {
+  padding-block: var(--section-pad);
+}
+
+.compact {
+  padding-block: var(--section-pad-compact);
+}
+
+.light {
+  background: var(--color-surface);
+}
+
+.white {
+  background: var(--color-card);
+}
+
+.lavender {
+  background: var(--color-lavender-soft);
+}
+
+.dark {
+  background: var(--color-carbon);
+  color: var(--color-text-on-dark);
+}
+
+.brand {
+  background: var(--color-action);
+  color: var(--color-white);
+}

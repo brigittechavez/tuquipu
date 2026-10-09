@@ -1,0 +1,57 @@
+.head {
+  display: grid;
+  gap: var(--gap-body-action);
+  align-items: end;
+}
+
+.cta {
+  justify-self: start;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: clamp(40px, 2rem + 2vw, 64px);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .area-produccion {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  /* Two balanced rows: featured production + inventory, then three peers. */
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .area-produccion {
+    grid-column: 1 / 5;
+  }
+
+  .area-inventario {
+    grid-column: 5 / 7;
+  }
+
+  .area-compras {
+    grid-column: 1 / 3;
+  }
+
+  .area-ventas {
+    grid-column: 3 / 5;
+  }
+
+  .area-finanzas {
+    grid-column: 5 / 7;
+  }
+}

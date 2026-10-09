@@ -1,0 +1,234 @@
+/* Mobile: bottom sheet. Desktop: centred card with Kappi presenting the offer. */
+.dialog {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  margin: auto 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background: rgba(18, 19, 26, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.panel {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  padding: 28px 20px max(24px, env(safe-area-inset-bottom));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--color-card);
+  box-shadow: 0 -12px 40px rgba(18, 19, 26, 0.18);
+}
+
+.art {
+  position: relative;
+  display: grid;
+  place-items: end center;
+  height: 112px;
+  margin-top: -46px;
+  overflow: visible;
+}
+
+.art > :not(.halo) {
+  position: relative;
+  width: auto !important;
+  height: 132px !important;
+}
+
+.art :global(img) {
+  width: auto;
+  height: 100%;
+}
+
+.halo {
+  position: absolute;
+  bottom: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-lavender) 0%, color-mix(in srgb, var(--color-lavender) 0%, transparent) 70%);
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.eyebrow {
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.title {
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.125rem);
+  line-height: var(--leading-heading);
+}
+
+.body {
+  color: var(--color-text-muted);
+}
+
+.actions {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.later {
+  justify-self: center;
+  min-height: 44px;
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.later:hover {
+  color: var(--color-ink);
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.close:hover {
+  background: var(--color-lavender);
+}
+
+.later:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Circular ring for the round close button (an outline would square off the corners). */
+.close:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--color-white),
+    0 0 0 6px var(--color-violet);
+}
+
+@media (min-width: 768px) {
+  .dialog {
+    width: min(960px, calc(100% - 48px));
+    margin: auto;
+  }
+
+  .panel {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: var(--space-8);
+    padding: 40px 48px 40px 24px;
+    border-radius: var(--radius-xl);
+    background:
+      radial-gradient(120% 140% at 0% 100%, var(--color-lavender) 0%, color-mix(in srgb, var(--color-lavender) 0%, transparent) 55%),
+      var(--color-card);
+    box-shadow: 0 24px 60px rgba(18, 19, 26, 0.25);
+  }
+
+  .art {
+    height: auto;
+    margin: 0;
+    place-items: center;
+  }
+
+  .art > :not(.halo) {
+    height: 260px !important;
+  }
+
+  .halo {
+    bottom: auto;
+    width: 280px;
+    height: 280px;
+  }
+
+  .actions {
+    grid-template-columns: repeat(2, auto);
+    justify-content: start;
+  }
+
+  .actions a {
+    white-space: nowrap;
+  }
+
+  .later {
+    justify-self: start;
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dialog[open] .panel {
+    animation: sheet-in 460ms var(--ease-out) both;
+  }
+
+  .dialog[open]::backdrop {
+    animation: fade-in 300ms var(--ease-out) both;
+  }
+
+  .dialog[open] .art :global(img) {
+    animation: kappi-in 650ms var(--ease-out) 180ms both;
+  }
+
+  @media (min-width: 768px) {
+    .dialog[open] .panel {
+      animation-name: card-in;
+    }
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Kappi v1 enter: whole illustration, 16px → 0, .985 → 1, opacity. */
+@keyframes kappi-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Espacio reservado para evidencia del producto</title>
+  <desc id="desc">Composición abstracta de comprobante y control, sin simular una captura real.</desc>
+  <rect width="800" height="500" rx="54" fill="#F9FAFB"/>
+  <rect x="28" y="28" width="744" height="444" rx="38" fill="#EBE7FF" stroke="#6045F4" stroke-opacity=".18" stroke-width="3"/>
+  <g transform="translate(122 86) rotate(-4 145 150)" stroke="#12131A" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="290" height="310" rx="36" fill="#F9FAFB" stroke-width="6"/>
+    <rect x="42" y="52" width="108" height="22" rx="11" fill="#7700E6" stroke="none"/>
+    <path d="M42 116H230M42 158H196M42 200H220" stroke="#EBE7FF" stroke-width="14"/>
+    <circle cx="225" cy="252" r="36" fill="#21C7B7" stroke="#F9FAFB" stroke-width="7"/>
+    <path d="M208 252L220 264 242 239" stroke="#F9FAFB" stroke-width="9"/>
+  </g>
+  <g transform="translate(368 138) rotate(3 150 120)" stroke="#12131A" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="320" height="242" rx="42" fill="#F9FAFB" stroke-width="6"/>
+    <g stroke="none">
+      <rect x="54" y="139" width="38" height="55" rx="12" fill="#6045F4"/>
+      <rect x="112" y="104" width="38" height="90" rx="12" fill="#7700E6"/>
+      <rect x="170" y="75" width="38" height="119" rx="12" fill="#6045F4"/>
+      <rect x="228" y="44" width="38" height="150" rx="12" fill="#21C7B7"/>
+    </g>
+  </g>
+</svg>

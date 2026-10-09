@@ -1,0 +1,47 @@
+.surface {
+  position: relative;
+  border: 1px solid var(--color-line);
+}
+
+.white {
+  background: var(--color-card);
+}
+
+.lavender {
+  background: var(--color-lavender);
+  border-color: transparent;
+}
+
+.dark {
+  background: var(--color-carbon-raised);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-on-dark);
+}
+
+.elevated {
+  box-shadow: var(--shadow-card);
+}
+
+.r-md {
+  border-radius: var(--radius-md);
+}
+
+.r-lg {
+  border-radius: var(--radius-lg);
+}
+
+.r-xl {
+  border-radius: var(--radius-xl);
+}
+
+.p-sm {
+  padding: var(--space-5);
+}
+
+.p-md {
+  padding: clamp(20px, 1rem + 1.5vw, 32px);
+}
+
+.p-lg {
+  padding: clamp(24px, 1rem + 3vw, 56px);
+}

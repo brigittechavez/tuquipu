@@ -1,0 +1,120 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 14px;
+  border: 1.5px solid var(--color-line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-card);
+  color: var(--color-ink);
+  font-size: var(--text-small);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.dialog {
+  width: min(100% - 24px, 420px);
+  max-width: none;
+  max-height: calc(100dvh - 24px);
+  margin: 12px 12px auto auto;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-card);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-raised);
+}
+
+.dialog::backdrop {
+  background: rgba(18, 19, 26, 0.36);
+}
+
+.panel {
+  padding: var(--space-5);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-weight: 500;
+  font-size: var(--text-small);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.close {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-lavender-soft);
+}
+
+.list {
+  display: grid;
+  gap: 2px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.item:hover {
+  background: var(--color-lavender-soft);
+  color: var(--color-accent-text);
+}
+
+.actions {
+  margin-top: var(--space-5);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dialog[open] {
+    animation: menu-in var(--dur-component) var(--ease-out);
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+}
+
+@media (min-width: 1024px) {
+  .trigger {
+    display: none;
+  }
+}
+
+/* Account lookup at the bottom of the menu, separated from navigation. */
+.account {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-line);
+}

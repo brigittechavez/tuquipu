@@ -1,0 +1,27 @@
+.pending {
+  margin-top: var(--gap-section-title-copy);
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background: var(--color-lavender);
+  font-weight: 500;
+}
+
+.body {
+  display: grid;
+  gap: var(--space-8);
+  margin-top: var(--space-10);
+}
+
+.body h2 {
+  font-size: var(--text-h3);
+}
+
+.body p {
+  margin-top: var(--gap-subtitle-body);
+  color: var(--color-text-muted);
+}
+
+.body a {
+  color: var(--color-accent-text);
+  font-weight: 500;
+}

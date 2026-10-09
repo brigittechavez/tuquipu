@@ -1,0 +1,115 @@
+.grid {
+  display: grid;
+  gap: clamp(32px, 2rem + 2vw, 64px);
+}
+
+.help {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  margin-top: var(--gap-body-action);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.item {
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  transition:
+    background-color var(--dur-component) var(--ease-out),
+    box-shadow var(--dur-component) var(--ease-out);
+}
+
+.item[open] {
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 64px;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  cursor: var(--cursor-pointer);
+  list-style: none;
+}
+
+.question::-webkit-details-marker {
+  display: none;
+}
+
+.questionText {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+.icon {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 50%;
+  background: var(--color-lavender);
+  color: var(--color-accent-text);
+  transition:
+    transform var(--dur-component) var(--ease-elastic),
+    background-color var(--dur-micro);
+}
+
+.item[open] .icon {
+  transform: rotate(45deg);
+  background: var(--color-action);
+  color: var(--color-white);
+}
+
+.answer {
+  display: grid;
+  gap: var(--space-3);
+  padding: 0 20px 22px;
+  color: var(--color-text-muted);
+  max-width: 44rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .item[open] .answer {
+    animation: answer-in var(--dur-component) var(--ease-out);
+  }
+}
+
+@keyframes answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    align-items: start;
+  }
+
+  .aside {
+    position: sticky;
+    top: calc(var(--header-height) + 48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon,
+  .item {
+    transition: none;
+  }
+}

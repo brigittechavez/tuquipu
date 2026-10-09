@@ -1,0 +1,161 @@
+/* Compact glass disc with the mint WhatsApp mark; it unfolds into a capsule with
+   "Agenda tu demo" on hover/focus (desktop) and at crucial moments (every device). */
+.fab {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: calc(var(--z-header) - 2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-card) 86%, transparent);
+  border: 1px solid rgba(18, 19, 26, 0.08);
+  box-shadow: 0 12px 32px -14px rgba(18, 19, 26, 0.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.icon {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+.icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.text {
+  display: grid;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1.15;
+  opacity: 0;
+}
+
+.fab[data-nudge] {
+  gap: 10px;
+  padding-right: 18px;
+}
+
+.fab[data-nudge] .text {
+  max-width: 12rem;
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fab:hover,
+  .fab:focus-visible {
+    gap: 10px;
+    padding-right: 18px;
+  }
+
+  .fab:hover .text,
+  .fab:focus-visible .text {
+    max-width: 12rem;
+    opacity: 1;
+  }
+}
+
+.title {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.sub {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.fab:hover {
+  background: var(--color-card);
+}
+
+.fab:hover .title {
+  color: var(--color-accent-text);
+}
+
+.fab:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--color-white),
+    0 0 0 6px var(--color-violet);
+}
+
+.fab[data-hidden] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+}
+
+@media (min-width: 768px) {
+  .fab {
+    right: max(24px, env(safe-area-inset-right));
+    bottom: max(24px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fab {
+    transition:
+      opacity 280ms var(--ease-out),
+      transform 360ms var(--ease-out),
+      gap 420ms var(--ease-out),
+      padding 420ms var(--ease-out),
+      background-color var(--dur-component) var(--ease-out);
+  }
+
+  .text {
+    transition:
+      max-width 460ms var(--ease-out),
+      opacity 260ms var(--ease-out) 80ms;
+  }
+
+  .fab:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Crucial moment: the mark sends one soft mint pulse and nods. */
+  .fab[data-nudge] .icon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(33, 199, 183, 0.6);
+    animation: ring 1.4s var(--ease-out) 2;
+  }
+
+  .fab[data-nudge] .icon svg {
+    animation: nod 900ms var(--ease-out) 150ms;
+  }
+}
+
+@keyframes ring {
+  to {
+    box-shadow: 0 0 0 12px rgba(33, 199, 183, 0);
+  }
+}
+
+@keyframes nod {
+  25% {
+    transform: rotate(-14deg) scale(1.08);
+  }
+
+  55% {
+    transform: rotate(9deg);
+  }
+}

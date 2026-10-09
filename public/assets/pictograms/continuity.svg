@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Continuidad operativa</title>
+  <g fill="none" stroke="#12131A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="8" y="14" width="28" height="36" rx="10" fill="#F9FAFB"/>
+    <rect x="28" y="14" width="28" height="36" rx="10" fill="#EBE7FF"/>
+    <path d="M18 27H29M18 35H26M38 27H47" stroke="#6045F4"/>
+    <path d="M38 37L42 41 50 32" stroke="#21C7B7" stroke-width="4.5"/>
+  </g>
+</svg>

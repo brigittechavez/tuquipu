@@ -1,0 +1,147 @@
+/* Mobile: heading → clip → steps. Desktop: clip on one side, heading + steps on the other. */
+.story {
+  display: grid;
+  grid-template-areas: "head" "media" "side";
+  gap: var(--space-6);
+}
+
+.head {
+  grid-area: head;
+}
+
+.media {
+  grid-area: media;
+  min-width: 0;
+}
+
+.side {
+  grid-area: side;
+}
+
+.side {
+  display: grid;
+  gap: var(--space-5);
+  align-content: start;
+}
+
+.steps {
+  display: grid;
+  gap: 6px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 16px 10px 10px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-on-dark);
+  font-size: var(--text-small);
+  font-weight: 500;
+  transition:
+    background-color var(--dur-component) var(--ease-out),
+    color var(--dur-component) var(--ease-out),
+    transform var(--dur-component) var(--ease-elastic);
+}
+
+.mark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: var(--text-micro);
+}
+
+.markIcon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 3;
+}
+
+.step[data-state="pending"] {
+  color: var(--color-text-on-dark-muted);
+}
+
+.step[data-state="active"] {
+  background: var(--color-action);
+  color: var(--color-white);
+  transform: translateX(6px);
+}
+
+.step[data-state="active"] .mark {
+  background: var(--color-card);
+  color: var(--color-accent-text);
+}
+
+.step[data-state="done"] .mark {
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+@media (min-width: 1024px) {
+  .story {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    grid-template-areas:
+      "media head"
+      "media side";
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(32px, 4vw, 64px);
+    row-gap: var(--space-6);
+  }
+
+  .reverse {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    grid-template-areas:
+      "head media"
+      "side media";
+  }
+}
+
+/* Steps arrive as cards, one after another, when the story enters. */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.motion-ready) .side:not([data-inview]) .step {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+
+  .side[data-inview] .step {
+    transition:
+      opacity 420ms var(--ease-out),
+      transform 620ms var(--ease-elastic),
+      background-color var(--dur-component) var(--ease-out),
+      color var(--dur-component) var(--ease-out);
+    transition-delay: calc(var(--i) * 110ms + 200ms), calc(var(--i) * 110ms + 200ms), 0ms, 0ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step {
+    transition: none;
+  }
+
+  .step[data-state="active"] {
+    transform: none;
+  }
+}
+
+/* Outcome step: mint, it confirms what the clip led to. */
+.outcome[data-state="done"] {
+  background: rgba(33, 199, 183, 0.14);
+  border-color: rgba(33, 199, 183, 0.4);
+}
+
+.outcome .mark {
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+.outcome[data-state="pending"] .mark {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-on-dark-muted);
+}

@@ -1,0 +1,78 @@
+.wrap {
+  position: relative;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .wrap {
+    display: block;
+  }
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1.5px solid var(--color-line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-card);
+  color: var(--color-ink);
+  font-size: var(--text-small);
+  font-weight: 500;
+  transition:
+    border-color var(--dur-micro) var(--ease-out),
+    color var(--dur-micro) var(--ease-out);
+}
+
+.trigger:hover,
+.trigger[aria-expanded="true"] {
+  border-color: var(--color-action);
+  color: var(--color-accent-text);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 10;
+  width: min(360px, calc(100vw - 32px));
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 24px 50px -20px rgba(18, 19, 26, 0.4);
+}
+
+/* Small notch pointing at the button. */
+.panel::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 40px;
+  width: 12px;
+  height: 12px;
+  background: var(--color-card);
+  border-left: 1px solid var(--color-line);
+  border-top: 1px solid var(--color-line);
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel {
+    animation: drop 220ms var(--ease-out) both;
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}

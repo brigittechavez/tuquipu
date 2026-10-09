@@ -1,0 +1,23 @@
+.wrap {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--space-4);
+  min-height: 60vh;
+  padding: var(--space-16) var(--gutter);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.title {
+  font-size: var(--text-h2);
+  color: var(--color-text);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}

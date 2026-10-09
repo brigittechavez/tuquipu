@@ -1,0 +1,169 @@
+.wrap {
+  position: relative;
+}
+
+/* Only desktops (large screen + mouse) get the expand affordance; phones and
+   tablets, in any orientation, already show the clip at full width. */
+.expand {
+  display: none;
+}
+
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+  .expand {
+    display: inline-flex;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  .hit {
+    cursor: zoom-in;
+  }
+
+  .hit :global(button) {
+    cursor: var(--cursor-pointer);
+  }
+}
+
+.expand {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px 0 10px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(18, 19, 26, 0.72);
+  color: var(--color-white);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.expand svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Desktop: the label appears when the clip is hovered or the button focused. */
+@media (hover: hover) and (pointer: fine) {
+  .expand span {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+  }
+
+  .wrap:hover .expand span,
+  .expand:focus-visible span {
+    max-width: 8rem;
+    opacity: 1;
+  }
+
+  .wrap:hover .expand {
+    background: var(--color-action);
+  }
+}
+
+.dialog {
+  width: min(1280px, calc(100% - 32px));
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background: rgba(18, 19, 26, 0.82);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.panel {
+  position: relative;
+  display: grid;
+  gap: 12px;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 120px);
+  border-radius: var(--radius-lg);
+  background: var(--color-carbon);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.caption {
+  color: var(--color-text-on-dark-muted);
+  font-size: var(--text-small);
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(18, 19, 26, 0.72);
+  color: var(--color-white);
+}
+
+.close:hover {
+  background: var(--color-action);
+}
+
+.close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.close:focus-visible,
+.expand:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--color-carbon),
+    0 0 0 6px var(--color-white);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .expand,
+  .expand span {
+    transition:
+      max-width 320ms var(--ease-out),
+      opacity 220ms var(--ease-out),
+      background-color var(--dur-component) var(--ease-out);
+  }
+
+  .dialog[open] .panel {
+    animation: zoom-in 380ms var(--ease-out) both;
+  }
+
+  .dialog[open]::backdrop {
+    animation: fade 260ms var(--ease-out) both;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}

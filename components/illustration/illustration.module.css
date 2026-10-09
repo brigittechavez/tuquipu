@@ -1,0 +1,115 @@
+.module {
+  display: block;
+  width: 100%;
+}
+
+.module svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.pictogram {
+  flex: none;
+}
+
+/* ─── Kappi v1 ─────────────────────────────────────────────────────────── */
+.kappiWrap {
+  display: block;
+  transform-origin: 50% 100%;
+}
+
+.kappi {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* pose-shift: fixed box, both poses bottom-center, uniform scale only. */
+.poseShift {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.poseLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+  user-select: none;
+  pointer-events: none;
+}
+
+.poseLayer[data-layer="to"] {
+  opacity: 0;
+}
+
+.poseShift[data-shifted] .poseLayer[data-layer="from"] {
+  opacity: 0;
+}
+
+.poseShift[data-shifted] .poseLayer[data-layer="to"] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 550ms total. The incoming pose fades in first and the outgoing one only
+     leaves afterwards, so the shared silhouette never turns translucent (no dip). */
+  .poseLayer[data-layer="to"] {
+    transition: opacity 550ms var(--ease-out);
+  }
+
+  .poseLayer[data-layer="from"] {
+    transition: opacity 300ms ease-in 250ms;
+  }
+
+  /* enter: once per view, whole illustration. */
+  :global(.js) .kappiWrap[data-reveal="kappi"] {
+    transition:
+      opacity 650ms var(--ease-out),
+      transform 650ms var(--ease-out);
+  }
+
+  :global(.js) .kappiWrap[data-reveal="kappi"]:not([data-inview]) {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+
+  /* idle: ≤3px lift and ≤0.4deg tilt, 6.2 s, only while visible and after entering. */
+  .kappiWrap[data-loop][data-playing]:is([data-inview], :not([data-reveal])) {
+    animation: kappi-idle 6.2s ease-in-out 700ms infinite;
+  }
+}
+
+@keyframes kappi-idle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(var(--idle-y, -3px)) rotate(var(--idle-r, 0.4deg));
+  }
+}
+
+/* Mobile: amplitude reduced ~50 %. */
+@media (max-width: 767.98px) {
+  .kappiWrap {
+    --idle-y: -1.5px;
+    --idle-r: 0.2deg;
+  }
+
+  :global(.js) .kappiWrap[data-reveal="kappi"]:not([data-inview]) {
+    transform: translateY(9px) scale(0.985);
+  }
+}
+
+/* Mirror (whole illustration, uniform): Kappi faces the content it accompanies. */
+.mirrored {
+  transform: scaleX(-1);
+}

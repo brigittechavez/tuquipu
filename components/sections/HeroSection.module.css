@@ -1,0 +1,192 @@
+/* One screen: compact promise on top, the plant landscape filling the rest (always in the first view). */
+.hero {
+  --s: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: calc(100svh - var(--header-height));
+  padding-top: clamp(28px, 1.5rem + 2vw, 64px);
+  padding-bottom: 0;
+  overflow: clip;
+}
+
+.copy {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  opacity: calc(1 - var(--s) * 0.7);
+  transform: translateY(calc(var(--s) * -40px));
+}
+
+.title {
+  max-width: 22ch;
+  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+}
+
+/* Lead + rotating sector on one line; the word cell keeps its own width per word. */
+.sectors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.35em;
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: clamp(1.125rem, 0.95rem + 0.7vw, 1.5rem);
+  line-height: 1.3;
+}
+
+.sectorsLead {
+  color: var(--color-text-muted);
+}
+
+.rotator {
+  display: inline-grid;
+  justify-items: start;
+  overflow: hidden;
+}
+
+.word {
+  grid-area: 1 / 1;
+  color: var(--color-accent-text);
+  white-space: nowrap;
+}
+
+/* Static default (no JS / reduced motion): only the first sector shows; the full list is in sr text. */
+.word:not(:first-child) {
+  visibility: hidden;
+}
+
+.body {
+  margin-top: var(--space-3);
+  max-width: 38rem;
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+}
+
+.ctas {
+  margin-top: var(--space-5);
+}
+
+/* Full-bleed landscape anchored to the bottom of the hero. */
+.scape {
+  position: relative;
+  align-self: end;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  aspect-ratio: 1880 / 445;
+  max-height: 52svh;
+  margin-top: clamp(16px, 2vw, 40px);
+  transform: translateY(calc(var(--s) * -30px)) scale(calc(1 + var(--s) * 0.06));
+  transform-origin: 50% 100%;
+}
+
+@media (max-width: 639.98px) {
+  .body {
+    display: none;
+  }
+
+  /* The sector word sits on its own line here: centre it. */
+  .rotator {
+    flex-basis: 100%;
+    justify-items: center;
+  }
+
+}
+
+/* Portrait screens (phones, tablets): zoom into the middle of the park (plant + line);
+   the edges run off screen. */
+@media (max-aspect-ratio: 1 / 1) {
+  .scape {
+    aspect-ratio: auto;
+    max-height: none;
+    overflow: hidden;
+  }
+
+  .scape > svg {
+    width: 230%;
+    max-width: none;
+    height: auto;
+    margin-left: -65%;
+  }
+}
+
+@media (max-aspect-ratio: 1 / 1) and (max-width: 639.98px) {
+  .scape > svg {
+    width: 290%;
+    margin-left: -95%;
+  }
+}
+
+/* ─── Motion ───────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  /* Text settles (transform only, keeps LCP). */
+  .copy > * {
+    animation: settle var(--dur-editorial) var(--ease-out) both;
+  }
+
+  .ctas {
+    animation-delay: 160ms;
+  }
+
+  .scape > svg {
+    animation: rise 1100ms var(--ease-out) 150ms both;
+  }
+
+  /* Ambient: one sector at a time, 12 s cycle; paused off-screen. */
+  :global(.js) .word {
+    visibility: visible;
+    opacity: 0;
+    transform: translateY(100%);
+    animation: word 12s var(--ease-out) infinite;
+    animation-delay: calc(var(--w) * 3s);
+  }
+
+  :global(.motion-ready) .rotator:not([data-playing]) .word {
+    animation-play-state: paused;
+  }
+}
+
+/* Reduced motion with JS: keep the first sector only, no movement. */
+@media (prefers-reduced-motion: reduce) {
+  .word:not(:first-child) {
+    visibility: hidden;
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: translateY(18px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+/* Chained slots: a word leaves (25 → 29 %) while the next one arrives (its 0 → 4 %), so the line is never empty. */
+@keyframes word {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  4%,
+  25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  29%,
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}

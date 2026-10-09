@@ -1,0 +1,39 @@
+.section {
+  overflow: clip;
+}
+
+.grid {
+  display: grid;
+  gap: clamp(40px, 2rem + 3vw, 72px);
+  align-items: center;
+}
+
+.heading h2 {
+  font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4.25rem);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+
+  .single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Phase 4: the CTA appears as the result of the sequence. Keyboard focus always reveals it. */
+@media (prefers-reduced-motion: no-preference) {
+  .ctas {
+    transition:
+      opacity 520ms var(--ease-out),
+      transform 520ms var(--ease-elastic);
+  }
+
+  .grid:is([data-phase="0"], [data-phase="1"], [data-phase="2"], [data-phase="3"]) .ctas:not(:focus-within) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}

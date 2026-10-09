@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title">
+  <title id="title">Contenido de producto cargando</title>
+  <defs>
+    <linearGradient id="shimmer" x1="0" x2="1">
+      <stop offset="0" stop-color="#EBE7FF"/>
+      <stop offset=".5" stop-color="#F9FAFB"/>
+      <stop offset="1" stop-color="#EBE7FF"/>
+    </linearGradient>
+  </defs>
+  <style>
+    #sweep{animation:sweep 1.8s ease-in-out infinite}
+    @keyframes sweep{0%{transform:translateX(-70%)}100%{transform:translateX(70%)}}
+    @media (prefers-reduced-motion:reduce){#sweep{animation:none;transform:none;opacity:.45}}
+  </style>
+  <rect width="800" height="500" rx="54" fill="#F9FAFB"/>
+  <rect x="28" y="28" width="744" height="444" rx="38" fill="#EBE7FF"/>
+  <rect x="64" y="68" width="150" height="24" rx="12" fill="#F9FAFB"/>
+  <rect x="64" y="126" width="450" height="32" rx="16" fill="#F9FAFB"/>
+  <rect x="64" y="184" width="672" height="208" rx="30" fill="#F9FAFB"/>
+  <g fill="#EBE7FF" stroke="#6045F4" stroke-opacity=".12">
+    <rect x="104" y="313" width="56" height="45" rx="14"/>
+    <rect x="187" y="276" width="56" height="82" rx="14"/>
+    <rect x="270" y="235" width="56" height="123" rx="14"/>
+  </g>
+  <rect id="sweep" x="-220" y="28" width="330" height="444" rx="38" fill="url(#shimmer)" opacity=".54"/>
+</svg>

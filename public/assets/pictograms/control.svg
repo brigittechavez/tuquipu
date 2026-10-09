@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Control visible</title>
+  <g fill="none" stroke="#12131A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="7" y="9" width="50" height="46" rx="14" fill="#F9FAFB"/>
+    <path d="M18 43V36M28 43V28M38 43V32M48 43V21" stroke="#6045F4" stroke-width="6"/>
+    <circle cx="48" cy="21" r="5" fill="#21C7B7" stroke="none"/>
+  </g>
+</svg>

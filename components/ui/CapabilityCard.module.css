@@ -1,0 +1,191 @@
+.card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+}
+
+.featured {
+  background: var(--color-lavender);
+  border-color: transparent;
+}
+
+/* Expanding field — the card reacts with a layer, not only color. */
+.field {
+  position: absolute;
+  z-index: -1;
+  right: -56px;
+  top: -56px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: var(--color-lavender);
+  transform: scale(0.45);
+  transition: transform 520ms var(--ease-out);
+}
+
+.featured .field {
+  background: #dcd4ff;
+}
+
+.layer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  padding: clamp(20px, 1rem + 1vw, 28px);
+  transition: transform var(--dur-component) var(--ease-elastic);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur-component) var(--ease-elastic);
+}
+
+.title {
+  font-size: var(--text-h3);
+}
+
+.featured .title {
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.125rem);
+}
+
+.link {
+  text-decoration: none;
+}
+
+/* Whole card is the target; the link keeps the accessible name. */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--radius-xl);
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.link:focus-visible::after {
+  outline: var(--focus-ring);
+  outline-offset: -3px;
+}
+
+.outcome {
+  margin-top: var(--gap-subtitle-body);
+}
+
+.featured .outcome {
+  font-size: var(--text-lead);
+  max-width: 34rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--space-4);
+}
+
+.tags li {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  transition: transform var(--dur-component) var(--ease-elastic);
+  transition-delay: calc(var(--t, 0) * 40ms);
+}
+
+.featured .tags li {
+  background: var(--color-card);
+  border-color: transparent;
+}
+
+.tags li:nth-child(2) {
+  --t: 1;
+}
+
+.tags li:nth-child(3) {
+  --t: 2;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: var(--space-5);
+  color: var(--color-accent-text);
+  font-size: var(--text-small);
+  font-weight: 500;
+}
+
+.arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--dur-component) var(--ease-elastic);
+}
+
+.card:hover .layer,
+.card:focus-within .layer {
+  transform: translateY(-3px);
+}
+
+.card:hover .icon,
+.card:focus-within .icon {
+  transform: translate(3px, -3px) rotate(-6deg);
+}
+
+.card:hover .field,
+.card:focus-within .field {
+  transform: scale(2.4);
+}
+
+.card:hover .tags li,
+.card:focus-within .tags li {
+  transform: translateY(-2px);
+}
+
+.card:hover .arrow,
+.card:focus-within .arrow {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer,
+  .icon,
+  .field,
+  .arrow,
+  .tags li {
+    transition: none;
+  }
+
+  .card:hover .layer,
+  .card:focus-within .layer,
+  .card:hover .icon,
+  .card:focus-within .icon,
+  .card:hover .tags li,
+  .card:focus-within .tags li,
+  .card:hover .arrow,
+  .card:focus-within .arrow {
+    transform: none;
+  }
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Operación</title>
+  <g fill="none" stroke="#12131A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="12" y="9" width="40" height="46" rx="12" fill="#F9FAFB"/>
+    <path d="M21 23H43M21 32H39M21 41H33" stroke="#6045F4"/>
+    <circle cx="49" cy="49" r="8" fill="#21C7B7" stroke="#F9FAFB"/>
+  </g>
+</svg>

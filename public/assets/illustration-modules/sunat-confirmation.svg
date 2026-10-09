@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" role="img" aria-labelledby="title desc">
+  <title id="title">Comprobante aceptado</title>
+  <desc id="desc">Documento electrónico con confirmación funcional.</desc>
+  <defs>
+    <linearGradient id="document" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F9FAFB"/>
+      <stop offset="1" stop-color="#EBE7FF"/>
+    </linearGradient>
+  </defs>
+  <g id="module-confirmation" fill="none" stroke="#12131A" stroke-linecap="round" stroke-linejoin="round">
+    <path id="document" d="M76 42H268L344 118V350C344 368 330 382 312 382H76C58 382 44 368 44 350V74C44 56 58 42 76 42Z" fill="url(#document)" stroke-width="8"/>
+    <path id="fold" d="M268 42V106C268 115 275 122 284 122H344" fill="#EBE7FF" stroke-width="8"/>
+    <rect id="accent" x="88" y="103" width="116" height="26" rx="13" fill="#7700E6" stroke="none"/>
+    <path id="line-a" d="M88 173H247" stroke="#EBE7FF" stroke-width="16"/>
+    <path id="line-b" d="M88 217H219" stroke="#EBE7FF" stroke-width="16"/>
+    <path id="line-c" d="M88 261H178" stroke="#EBE7FF" stroke-width="16"/>
+    <circle id="status" cx="290" cy="289" r="66" fill="#21C7B7" stroke="#F9FAFB" stroke-width="10"/>
+    <path id="check" d="M258 291L281 314 325 266" stroke="#F9FAFB" stroke-width="18"/>
+  </g>
+</svg>

@@ -1,0 +1,289 @@
+.scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-body);
+}
+
+.pillText {
+  font-size: 15px;
+  font-weight: 500;
+  fill: var(--color-carbon);
+}
+
+.item,
+.variant,
+.steam circle,
+.nozzle,
+.paddle,
+.bar,
+.pill {
+  transform-box: fill-box;
+}
+
+.steam circle,
+.pill {
+  transform-origin: 50% 100%;
+}
+
+.bar {
+  transform-origin: 50% 100%;
+}
+
+/* ─── Static frame (no JS / reduced motion) ─── */
+.item {
+  transform: translateX(calc(var(--travel) * (0.1 + var(--k) * 0.27)));
+}
+
+.variant:not(:first-child) {
+  opacity: 0;
+}
+
+.pill {
+  opacity: 1;
+}
+
+.pill ~ .pill {
+  opacity: 0;
+}
+
+.steam {
+  opacity: 0;
+}
+
+.van {
+  transform: translateX(120px);
+}
+
+.flow {
+  stroke-dasharray: 2 12;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Inputs arrive: the truck drives in, waits at the warehouse, drives on. */
+  :global(.js) .truck {
+    animation: truck 12s var(--ease-out) infinite;
+  }
+
+  /* The order leaves: the van pulls out towards the right. */
+  :global(.js) .van {
+    animation: van 12s ease-in infinite;
+  }
+
+  :global(.js) .steam {
+    opacity: 1;
+  }
+
+  :global(.js) .steam circle {
+    opacity: 0;
+    animation: steam 3.6s ease-out infinite;
+    animation-delay: calc(var(--k) * 1.2s);
+  }
+
+  :global(.js) .flow {
+    animation: flow 1.4s linear infinite;
+  }
+
+  :global(.js) .item {
+    animation: ride 6s linear infinite;
+    animation-delay: calc(var(--k) * -1.5s);
+  }
+
+  /* Products follow the hero's 12 s sector word (3 s each). */
+  :global(.js) .variant,
+  :global(.js) .variant:not(:first-child) {
+    opacity: 0;
+    animation: sector 12s linear infinite;
+    animation-delay: calc(var(--s) * 3s);
+  }
+
+  :global(.js) .nozzle {
+    animation: press 1.5s var(--ease-out) infinite;
+  }
+
+  :global(.js) .paddle {
+    animation: stir 1.6s ease-in-out infinite;
+    transform-origin: 50% 100%;
+  }
+
+  :global(.js) .bar {
+    animation: grow 3s var(--ease-out) infinite;
+    animation-delay: calc(var(--k) * 0.18s);
+  }
+
+  /* One status pill at a time, in process order (12 s cycle, 3 s each). */
+  :global(.js) .pill,
+  :global(.js) .pill ~ .pill {
+    opacity: 0;
+    animation: pill 12s var(--ease-out) infinite;
+    animation-delay: calc(var(--i) * 3s);
+  }
+
+  :global(.js) .ground {
+    animation: drift 18s linear infinite;
+  }
+
+  /* Off screen or hidden tab: everything holds. */
+  :global(.motion-ready) :global([data-loop]:not([data-playing])) .scene * {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes truck {
+  0% {
+    opacity: 0;
+    transform: translateX(-260px);
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  30%,
+  60% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  92% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(380px);
+  }
+}
+
+@keyframes van {
+  0%,
+  55% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  90% {
+    opacity: 0;
+    transform: translateX(520px);
+  }
+
+  91% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes steam {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.5);
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(22px, -70px) scale(1.5);
+  }
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+@keyframes ride {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  8%,
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(var(--travel));
+  }
+}
+
+@keyframes sector {
+  0%,
+  24% {
+    opacity: 1;
+  }
+
+  25%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes press {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes stir {
+  50% {
+    transform: rotate(20deg);
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scaleY(0.3);
+  }
+
+  40%,
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes pill {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+
+  4%,
+  21% {
+    opacity: 1;
+    transform: none;
+  }
+
+  25%,
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes drift {
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+
+.groundTop { stop-color: var(--color-lavender-soft); }
+.groundEnd { stop-color: var(--color-surface); stop-opacity: 0; }
+.glowTop { stop-color: var(--color-lavender); stop-opacity: 0.9; }
+.glowEnd { stop-color: var(--color-lavender); stop-opacity: 0; }

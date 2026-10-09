@@ -1,0 +1,163 @@
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  align-items: end;
+}
+
+.kappi {
+  width: clamp(84px, 18vw, 200px);
+  margin-bottom: -8px;
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: clamp(32px, 2rem + 1vw, 56px);
+  counter-reset: step;
+}
+
+.step {
+  position: relative;
+  padding: 20px 20px 22px;
+  border-radius: var(--radius-lg);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+}
+
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: var(--space-4);
+  border-radius: 12px;
+  background: var(--color-carbon);
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: var(--text-small);
+}
+
+.step:last-child .num {
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+.title {
+  font-size: 1.125rem;
+}
+
+.body {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+}
+
+.notes {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.fee {
+  font-weight: 500;
+}
+
+.support {
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+  max-width: 56rem;
+}
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .steps {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  /* Overlapping steps: each hands off to the next (solape, no connectors). */
+  .step + .step {
+    margin-left: -12px;
+  }
+
+  /* Keep content clear of the 12px the next card covers. */
+  .step:not(:last-child) {
+    padding-right: 32px;
+  }
+
+  .step:nth-child(even) {
+    margin-top: 24px;
+  }
+}
+
+/* ─── Motion: the five steps are dealt like cards, then a turn passes 1 → 5 ─── */
+@media (prefers-reduced-motion: no-preference) {
+  .step {
+    transition:
+      transform 760ms var(--ease-elastic),
+      opacity 420ms var(--ease-out),
+      box-shadow var(--dur-component) var(--ease-out);
+    transition-delay: calc(var(--i) * 90ms);
+  }
+
+  .num {
+    transition:
+      background-color var(--dur-component) var(--ease-out),
+      color var(--dur-component) var(--ease-out);
+  }
+
+  /* Mobile/tablet: they rise one after another. */
+  :global(.motion-ready) .steps:not([data-inview]) .step {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  .steps[data-inview] .step {
+    animation: turn 620ms var(--ease-out) both;
+    animation-delay: calc(900ms + var(--i) * 320ms);
+  }
+
+  .steps[data-inview] .num {
+    animation: turn-num 620ms var(--ease-out) both;
+    animation-delay: calc(900ms + var(--i) * 320ms);
+  }
+
+  .step:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-raised);
+    transition-delay: 0ms;
+  }
+
+  @media (min-width: 1024px) {
+    /* Desktop: stacked on the first card, then fanned out to their places. */
+    :global(.motion-ready) .steps:not([data-inview]) .step {
+      opacity: 1;
+      transform: translateX(calc(var(--i) * (-100% + 12px))) rotate(calc(var(--i) * -2.5deg));
+    }
+
+    :global(.motion-ready) .steps:not([data-inview]) .step:not(:first-child) {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes turn {
+  40% {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-raised);
+  }
+}
+
+@keyframes turn-num {
+  30%,
+  60% {
+    background: var(--color-action);
+    color: var(--color-white);
+  }
+}

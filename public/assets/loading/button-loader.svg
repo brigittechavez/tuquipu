@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-labelledby="title">
+  <title id="title">Procesando</title>
+  <style>
+    .bar{animation:pulse 1.05s ease-in-out infinite}.b{animation-delay:.12s}.c{animation-delay:.24s}
+    @keyframes pulse{0%,100%{opacity:.28;transform:scaleX(.72)}50%{opacity:1;transform:scaleX(1)}}
+    @media (prefers-reduced-motion:reduce){.bar{animation:none;opacity:1}}
+  </style>
+  <g fill="#F9FAFB" transform-origin="16px 16px">
+    <rect class="bar a" x="5" y="7" width="22" height="4" rx="2"/>
+    <rect class="bar b" x="5" y="14" width="16" height="4" rx="2"/>
+    <rect class="bar c" x="5" y="21" width="11" height="4" rx="2"/>
+  </g>
+</svg>

@@ -1,0 +1,650 @@
+.cards {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: clamp(40px, 2rem + 2vw, 72px);
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 1rem + 1.4vw, 36px);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-card);
+}
+
+.recommended {
+  background: var(--color-card);
+  border: 2px solid var(--color-action);
+  box-shadow: var(--shadow-raised);
+}
+
+.nameRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.planName {
+  font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.875rem);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-action);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.fit {
+  margin-top: var(--gap-subtitle-body);
+  color: var(--color-text-muted);
+  font-size: var(--text-small);
+}
+
+.price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-top: var(--space-6);
+}
+
+.amount {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: clamp(2.75rem, 2rem + 2vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.currency {
+  font-size: 0.45em;
+  margin-right: 4px;
+  letter-spacing: 0;
+  vertical-align: 0.8em;
+}
+
+.suffix {
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.level {
+  margin-top: var(--space-2);
+  font-weight: 500;
+  color: var(--color-accent-text);
+  font-size: var(--text-small);
+}
+
+.limits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: 2px;
+  margin-top: var(--space-6);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.limits > div {
+  padding: 10px 10px 12px;
+  background: var(--color-lavender-soft);
+}
+
+.recommended .limits > div {
+  background: var(--color-lavender);
+}
+
+.limits dt {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+}
+
+.limits dd {
+  margin-top: 2px;
+  font-weight: 500;
+  font-size: var(--text-small);
+  line-height: 1.3;
+}
+
+.highlights {
+  display: grid;
+  gap: 10px;
+  margin-top: var(--space-6);
+  margin-bottom: var(--gap-body-action);
+}
+
+.highlights li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: var(--text-small);
+  font-weight: 500;
+}
+
+.check {
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+.actions {
+  display: grid;
+  gap: var(--space-2);
+  /* Pinned to the bottom: the three cards end on the same line. */
+  margin-top: auto;
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+/* Implementation / disclosures */
+.notice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding: clamp(20px, 1rem + 1vw, 28px);
+  border-radius: var(--radius-lg);
+  background: var(--color-carbon);
+  color: var(--color-text-on-dark);
+}
+
+.noticeIcon {
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  border-radius: 50%;
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+.noticeTitle {
+  font-weight: 500;
+  font-size: var(--text-lead);
+  line-height: 1.35;
+}
+
+.noticeBody {
+  margin-top: var(--space-2);
+  color: var(--color-text-on-dark-muted);
+  font-size: var(--text-small);
+}
+
+.noticeBody a {
+  color: var(--color-white);
+  font-weight: 500;
+  text-underline-offset: 3px;
+}
+
+.notice a:focus-visible {
+  outline-color: var(--color-white);
+}
+
+.disclosure {
+  margin-top: var(--space-6);
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  max-width: 60rem;
+}
+
+.custom {
+  display: grid;
+  gap: var(--space-4);
+  align-items: center;
+  margin-top: var(--space-8);
+  padding: clamp(20px, 1rem + 1vw, 28px);
+  border-radius: var(--radius-lg);
+  border: 1.5px dashed var(--color-line-strong);
+}
+
+.customText {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-weight: 500;
+  font-size: var(--text-h3);
+  line-height: var(--leading-heading);
+}
+
+/* Comparison */
+.compare {
+  margin-top: var(--space-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+}
+
+.compareSummary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  cursor: var(--cursor-pointer);
+  list-style: none;
+}
+
+.compareSummary::-webkit-details-marker {
+  display: none;
+}
+
+.compareIcon {
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--color-action);
+  color: var(--color-white);
+  transition: transform var(--dur-component) var(--ease-elastic);
+}
+
+.compare[open] .compareIcon {
+  transform: rotate(45deg);
+}
+
+.tableWrap {
+  display: none;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--text-small);
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.table thead th {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 1;
+  background: var(--color-card);
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: 1rem;
+}
+
+.tableBadge {
+  color: var(--color-accent-text);
+  font-family: var(--font-body);
+  font-size: var(--text-micro);
+}
+
+.table tbody th {
+  font-weight: 500;
+}
+
+.table td {
+  width: 20%;
+}
+
+.groupRow th {
+  padding-top: 24px;
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.yes,
+.no {
+  width: 22px;
+  height: 22px;
+  padding: 4px;
+  border-radius: 50%;
+}
+
+.yes {
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+.no {
+  background: var(--color-lavender);
+  color: var(--color-text-muted);
+}
+
+.textValue {
+  font-weight: 500;
+}
+
+.stackCompare {
+  display: grid;
+  gap: var(--space-4);
+  padding: 0 var(--space-3) var(--space-4);
+}
+
+.stackPlan {
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+}
+
+.stackTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-h3);
+}
+
+.stackGroup {
+  margin-top: var(--space-5);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.stackList > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-line);
+  font-size: var(--text-small);
+}
+
+.stackList dd {
+  flex: none;
+  text-align: right;
+}
+
+@media (min-width: 768px) {
+  .tableWrap {
+    display: block;
+    padding: 0 var(--space-3) var(--space-4);
+  }
+
+  .stackCompare {
+    display: none;
+  }
+
+  .custom {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+
+  .recommended {
+    margin-top: -16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compareIcon {
+    transition: none;
+  }
+}
+
+/* ─── Progression ─────────────────────────────────────────────── */
+.leap {
+  display: inline-flex;
+  margin-top: var(--space-3);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-lavender);
+  color: var(--color-accent-text);
+  font-size: var(--text-small);
+  font-weight: 500;
+  justify-self: start;
+}
+
+.recommended .leap {
+  background: var(--color-action);
+  color: var(--color-white);
+}
+
+.meters {
+  display: grid;
+  gap: 10px;
+  margin-top: var(--space-6);
+}
+
+.meter dt {
+  font-size: var(--text-micro);
+  color: var(--color-text-muted);
+}
+
+.meter dd {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.meterValue {
+  font-weight: 500;
+  font-size: var(--text-small);
+  font-variant-numeric: tabular-nums;
+}
+
+.meterBar {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-lavender-soft);
+  overflow: hidden;
+}
+
+.meterBar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-violet);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--fill));
+}
+
+.recommended .meterBar span {
+  background: var(--color-action);
+}
+
+.includes {
+  margin-top: var(--space-6);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.includes + .highlights {
+  margin-top: var(--space-3);
+}
+
+/* Meters fill once when the plans enter (assemble), then rest. */
+@media (prefers-reduced-motion: no-preference) {
+  .meterBar span {
+    transition: transform 900ms var(--ease-out) 200ms;
+  }
+
+  :global(.motion-ready) [data-plans]:not([data-inview]) .meterBar span {
+    transform: scaleX(0);
+  }
+}
+
+/* ─── Scale tier (Industria): same family, mint accents ─────────────── */
+.scale .leap {
+  background: rgba(33, 199, 183, 0.16);
+  color: var(--color-mint-text);
+}
+
+.scale .meterBar span {
+  background: var(--color-mint);
+}
+
+/* Secondary contact as a quiet link under the main action, not a second big button. */
+.waLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--color-line-strong);
+  text-underline-offset: 4px;
+}
+
+.waLink:hover {
+  color: var(--color-accent-text);
+  text-decoration-color: currentColor;
+}
+
+/* ─── Comparison: "only differences" filter (CSS only) ───────────────── */
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 var(--space-5) var(--space-4);
+  min-height: 44px;
+  font-size: var(--text-small);
+  font-weight: 500;
+  cursor: var(--cursor-pointer);
+}
+
+.filter input {
+  appearance: none;
+  position: relative;
+  width: 40px;
+  height: 24px;
+  margin: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-line-strong);
+  transition: background-color var(--dur-component) var(--ease-out);
+}
+
+.filter input::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-card);
+  box-shadow: 0 1px 3px rgba(18, 19, 26, 0.25);
+  transition: transform var(--dur-component) var(--ease-out);
+}
+
+.filter input:checked {
+  background: var(--color-action);
+}
+
+.filter input:checked::after {
+  transform: translateX(16px);
+}
+
+.sameNote {
+  display: none;
+}
+
+.compare:has(.filter input:checked) [data-same],
+.compare:has(.filter input:checked) [data-all-same] {
+  display: none;
+}
+
+.compare:has(.filter input:checked) .sameNote {
+  display: table-row;
+}
+
+.compare:has(.filter input:checked) div.sameNote,
+.compare:has(.filter input:checked) p.sameNote {
+  display: block;
+}
+
+.sameNote th,
+p.sameNote {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* A value that grows from the previous plan is marked, so the jump reads by itself. */
+[data-up] .textValue,
+[data-up] > .upValue {
+  display: inline-flex;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--color-lavender);
+  color: var(--color-accent-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filter input,
+  .filter input::after {
+    transition: none;
+  }
+}
+
+/* Roadmap items: listed after what is available, with a quiet "Próximamente" badge. */
+.upcoming {
+  color: var(--color-text-muted);
+}
+
+.soonIcon {
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--color-lavender-soft);
+  color: var(--color-violet);
+  stroke-width: 2.5;
+}
+
+.soon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+  padding: 1px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-lavender);
+  color: var(--color-accent-text);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+
+/* A roadmap value must not look like a "grows" highlight. */
+[data-up] .soon {
+  background: var(--color-lavender);
+}

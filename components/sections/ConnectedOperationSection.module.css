@@ -1,0 +1,229 @@
+.section {
+  overflow: clip;
+}
+
+/* ─── Base (no JS / reduced motion): the whole route, then the five steps ─── */
+.journey {
+  margin-top: clamp(24px, 1.5rem + 2vw, 56px);
+}
+
+.scene {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-height: 70vh;
+  margin-inline: auto;
+}
+
+.chapters {
+  display: grid;
+  gap: var(--space-10);
+  margin-top: var(--space-6);
+}
+
+.chapter {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 40rem;
+}
+
+.stepNum {
+  margin-right: 8px;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-action);
+  color: var(--color-white);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.step {
+  font-size: var(--text-small);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.title {
+  font-size: clamp(1.625rem, 1.1rem + 1.8vw, 2.75rem);
+  line-height: var(--leading-heading);
+}
+
+.body {
+  color: var(--color-text-muted);
+  font-size: var(--text-lead);
+  max-width: 30rem;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 8px;
+  padding: 6px 12px 6px 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+  font-size: var(--text-micro);
+  font-weight: 500;
+}
+
+.statusIcon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--color-mint);
+  color: var(--color-carbon);
+}
+
+.next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-accent-text);
+  font-size: var(--text-small);
+  font-weight: 500;
+}
+
+.nextIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Pinned (JS + motion): the route stays on screen and the story moves through it ─── */
+.journey[data-pinned] {
+  height: calc(var(--count) * 85vh + 100vh);
+}
+
+.journey[data-pinned] .pin {
+  position: sticky;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  overflow: hidden;
+}
+
+.journey[data-pinned] .scene {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  max-height: none;
+}
+
+.journey[data-pinned] .overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* A soft wash of the section colour behind the text: legible, and still no frame. */
+.journey[data-pinned] .pin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--color-lavender-soft) 0%, color-mix(in srgb, var(--color-lavender-soft) 92%, transparent) 32%, color-mix(in srgb, var(--color-lavender-soft) 0%, transparent) 52%);
+}
+
+.journey[data-pinned] .overlay {
+  z-index: 2;
+}
+
+.journey[data-pinned] .chapters {
+  position: absolute;
+  top: 20px;
+  left: var(--gutter);
+  right: var(--gutter);
+  margin: 0;
+  display: block;
+}
+
+.journey[data-pinned] .chapter {
+  position: absolute;
+  inset: 0 0 auto;
+  gap: var(--space-2);
+}
+
+/* Phones: keep the text compact so the route breathes below it. */
+.journey[data-pinned] .status,
+.journey[data-pinned] .next {
+  display: none;
+}
+
+.journey[data-pinned] .title {
+  font-size: clamp(1.375rem, 1rem + 1.6vw, 2.25rem);
+}
+
+.journey[data-pinned] .body {
+  font-size: var(--text-body);
+}
+
+.journey[data-pinned] .chapter > * {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.journey[data-pinned] .chapter[data-state="done"] > * {
+  transform: translateY(-18px);
+}
+
+.journey[data-pinned] .chapter[data-state="active"] > * {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .journey[data-pinned] .chapter > * {
+    transition:
+      opacity 420ms var(--ease-out),
+      transform 620ms var(--ease-out);
+  }
+
+  .journey[data-pinned] .chapter[data-state="active"] > :nth-child(2) {
+    transition-delay: 80ms;
+  }
+
+  .journey[data-pinned] .chapter[data-state="active"] > :nth-child(3) {
+    transition-delay: 160ms;
+  }
+
+  .journey[data-pinned] .chapter[data-state="active"] > :nth-child(4) {
+    transition-delay: 240ms;
+  }
+
+  .journey[data-pinned] .chapter[data-state="active"] > :nth-child(5) {
+    transition-delay: 320ms;
+  }
+}
+
+@media (min-width: 1024px) {
+  .journey[data-pinned] .pin::before {
+    background:
+      linear-gradient(90deg, var(--color-lavender-soft) 0%, color-mix(in srgb, var(--color-lavender-soft) 94%, transparent) 30%, color-mix(in srgb, var(--color-lavender-soft) 0%, transparent) 46%),
+      linear-gradient(180deg, var(--color-lavender-soft) 0%, color-mix(in srgb, var(--color-lavender-soft) 0%, transparent) 12%);
+  }
+
+  .journey[data-pinned] .chapters {
+    top: 50%;
+    right: auto;
+    width: min(34%, 28rem);
+    translate: 0 -50%;
+    height: 22rem;
+  }
+
+  .journey[data-pinned] .chapter {
+    top: 50%;
+    translate: 0 -50%;
+  }
+
+  .journey[data-pinned] .status,
+  .journey[data-pinned] .next {
+    display: inline-flex;
+  }
+
+  .journey[data-pinned] .body {
+    font-size: var(--text-lead);
+  }
+}

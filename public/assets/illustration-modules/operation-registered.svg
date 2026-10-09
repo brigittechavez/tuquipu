@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 420" role="img" aria-labelledby="title desc">
+  <title id="title">Operación registrada</title>
+  <desc id="desc">Módulo ilustrado de comprobante de venta conectado.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F9FAFB"/>
+      <stop offset="1" stop-color="#EBE7FF"/>
+    </linearGradient>
+  </defs>
+  <g id="module-operation" fill="none" stroke="#12131A" stroke-linecap="round" stroke-linejoin="round">
+    <path id="receipt" d="M74 36H270C292 36 310 54 310 76V346L291 333 271 346 251 333 231 346 211 333 191 346 171 333 151 346 131 333 111 346 91 333 74 346V36Z" fill="url(#paper)" stroke-width="8"/>
+    <rect id="accent" x="111" y="89" width="116" height="26" rx="13" fill="#7700E6" stroke="none"/>
+    <path id="line-a" d="M111 155H250" stroke="#EBE7FF" stroke-width="16"/>
+    <path id="line-b" d="M111 199H214" stroke="#EBE7FF" stroke-width="16"/>
+    <path id="line-c" d="M111 243H238" stroke="#EBE7FF" stroke-width="16"/>
+    <path id="line-d" d="M111 287H183" stroke="#21C7B7" stroke-width="16"/>
+  </g>
+</svg>

@@ -1,0 +1,124 @@
+/* Light band with grey logos (no frames, no colour), separated from the hero by some air. */
+.band {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  margin-top: clamp(40px, 2rem + 2vw, 72px);
+  padding-block: clamp(24px, 1.2rem + 1.5vw, 40px);
+  background: var(--color-lavender-soft);
+  border-block: 1px solid var(--color-line);
+  overflow: hidden;
+}
+
+.title {
+  justify-self: center;
+  font-family: var(--font-body);
+  font-stretch: normal;
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Soft fade at both edges so logos glide in and out. */
+.viewport {
+  min-width: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(48px, 7vw, 112px);
+  padding-right: clamp(48px, 7vw, 112px);
+}
+
+.item {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+/* Same box for every logo, whatever its proportions; no visible frame. */
+.frame {
+  --logo-h: clamp(44px, 4vw, 56px);
+  display: grid;
+  place-items: center;
+  width: clamp(150px, 16vw, 210px);
+  height: var(--logo-h);
+}
+
+/* Fits inside the box on both axes (never taller than the frame). */
+.logo {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  /* Explicit length: a percentage max-height does not resolve on a grid item. */
+  max-height: var(--logo-h);
+  filter: grayscale(1) contrast(1.1);
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+}
+
+/* "Cofinanciado por" sits small above its logo; other items keep the same height. */
+.label {
+  min-height: 1.2em;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+/* Dark theme: the logos invert to light grey on the dark band. */
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: grayscale(1) invert(1) contrast(1.1);
+    opacity: 0.7;
+    mix-blend-mode: screen;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    animation: glide 40s linear infinite;
+  }
+}
+
+/* Reduced motion: one still, centred row. */
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .track {
+    width: auto;
+    justify-content: center;
+  }
+
+  .row {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-inline: var(--gutter);
+  }
+
+  .row[aria-hidden] {
+    display: none;
+  }
+}
+
+/* Three identical rows: shifting by one row length loops seamlessly. */
+@keyframes glide {
+  to {
+    transform: translateX(calc(-100% / 3));
+  }
+}
